@@ -1,0 +1,20 @@
+.news-card{
+    background-color: rgb(90, 88, 88);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+.image-sec{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img{
+    object-fit: contain;
+    width: 10rem;
+    height: 10rem;
+}
+span{
+    color: rgb(43, 8, 75);
+}

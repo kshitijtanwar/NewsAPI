@@ -1,0 +1,26 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.fetch{
+  text-align: center;
+}
+
+
+@media (min-width:872px) {
+  .content{
+    margin: 0 auto;
+    width: 50vw;
+  }
+  
+}
