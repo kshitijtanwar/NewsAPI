@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import NewsList from "./components/NewsList/NewsList";
+import ReportNews from "./components/ReportNews/ReportNews";
 
 function App() {
     const [news, setNews] = useState([]);
@@ -44,6 +45,20 @@ function App() {
         fetchNewsHandler();
     }, [fetchNewsHandler]);
 
+    const addNewsHandler = async (news) => {
+        fetch("https://reat-http-e398e-default-rtdb.firebaseio.com/news.json?auth=e0wSBh0YvMU4ARSTHs2z16e9jnMzLSM1vbVLQ5rb", {
+            method: "POST",
+            body: JSON.stringify(news),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                console.log(response);
+                return response;
+            })
+    };
+
     let content = <p></p>;
     if (news.length > 0) {
         content = <NewsList news={news} />;
@@ -56,10 +71,12 @@ function App() {
     }
 
     return (
-        <div className="content">
-            <button onClick={fetchNewsHandler}>Fetch News</button>
-            {content}
-        </div>
+        <>
+            <section className="add-report">
+                <ReportNews onAddNews={addNewsHandler} />
+            </section>
+            <div className="content">{content}</div>
+        </>
     );
 }
 
