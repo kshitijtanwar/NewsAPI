@@ -5,12 +5,16 @@ import NewsList from "./components/NewsList/NewsList";
 function App() {
     const [news, setNews] = useState([]);
     const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState("");
     const fetchNewsHandler = () => {
       setIsLoading(true);
       fetch(
         "https://newsapi.org/v2/top-headlines?country=in&apiKey=52d12c5185e4497ba95d820df1a1454e"
         )
         .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
           return response.json();
         })
         .then((data) => {
@@ -25,7 +29,10 @@ function App() {
           });
           setNews(transformedNews);
           setIsLoading(false);
+            }).catch(error =>{
+              setError(error.message);
             });
+            setIsLoading(false);
     };
 
     let content = <p>No News Found!!</p>;
@@ -34,6 +41,9 @@ function App() {
     }
     if(isLoading){
       content = <p>Please wait loading...</p>
+    }
+    if(error){
+      content = <p>Something went wrong...</p>
     }
 
     return (
